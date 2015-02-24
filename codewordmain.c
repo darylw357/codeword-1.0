@@ -6,9 +6,9 @@
 int main(int argc, char *argv[])
 {
 int i;
-char *filename = argv[2];
+char *filename = argv[1];
 int count = 0;
-int maxlength = 100;
+int maxlength = 256;
 char line[maxlength];
 
 for(i = 1; i < argc; i++)
@@ -30,7 +30,7 @@ for(i = 1; i < argc; i++)
 	}
 }
 
-FILE *fp = fopen(filename, "words");
+FILE *fp = fopen(filename, "r");
 	if(fp == NULL)
 	{
 		fprintf(stderr, "Unable to open \"%s\"\n", filename);
@@ -41,7 +41,10 @@ while(fgets(line, maxlength, fp) != NULL)
 	count++;
 }	
 	
+printf("There were %d lines in that file.\n", count);
+	
 fclose(fp);
 
 
 }
+

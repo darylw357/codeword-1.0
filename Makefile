@@ -1,5 +1,3 @@
-/*Makefile*/
-
 FLAGS = -std=c99 -Wall
 
 all: codeword.exe

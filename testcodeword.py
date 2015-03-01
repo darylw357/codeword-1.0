@@ -44,9 +44,7 @@ def main(args):
         print('Executable file %r does not exist' % exename)
         return 1
 
-    if not exists(TEST_FILES_DIR) or not isdir(TEST_FILES_DIR):
-        print('Test files directory not found at %r' % TEST_FILES_DIR)
-        return 1
+
 
     # Actually run the tests
     return run_tests(exename)

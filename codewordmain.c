@@ -4,6 +4,19 @@
 #include <stdio.h>
 #include <string.h>
 
+//function dec
+char ArgsCheck(int argc);
+
+//function def
+char ArgsCheck(int argc)
+{
+	if(argc <= 1)
+	{
+		fprintf(stdout, "Usage:\ncodeword.exe [-h/--help]                     : Print this message.\ncodeword.exe --spellcheck DICTFILE WORDS     : Check spelling of words.\ncodeword.exe --anagram DICTFILE WORDS        : Find anagrams of words.\ncodeword.exe --codeword-match DICTFILE WORDS : Find words matching codeword.\ncodeword.exe --codeword-show CSVFILE         : Show codeword from csv file.");
+		return 0;
+	}
+}
+
 int main(int argc, char *argv[])
 {
 	int i;
@@ -15,11 +28,11 @@ int main(int argc, char *argv[])
 	const char *entered = argv[3];
 	FILE *fp;
 	
-	if(argc <= 1)
-	{
-			fprintf(stdout, "Usage:\ncodeword.exe [-h/--help]                     : Print this message.\ncodeword.exe --spellcheck DICTFILE WORDS     : Check spelling of words.\ncodeword.exe --anagram DICTFILE WORDS        : Find anagrams of words.\ncodeword.exe --codeword-match DICTFILE WORDS : Find words matching codeword.\ncodeword.exe --codeword-show CSVFILE         : Show codeword from csv file.");
-			return 0;
-	}
+	
+	//function call
+	ArgsCheck(argc);
+	
+
 	for(i = 1; i < argc; i++)
 	{
 		if(strcmp(argv[i], "-h" )  == 0)
@@ -91,5 +104,6 @@ int main(int argc, char *argv[])
 	}	
 
 }	
-	
+
+
 

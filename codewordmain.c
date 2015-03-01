@@ -1,4 +1,5 @@
 /* A spell checking program*/
+/*Daryl White*/
 
 #include <stdio.h>
 #include <string.h>
@@ -10,107 +11,85 @@ int main(int argc, char *argv[])
 	int maxlength = 256;
 	char line[maxlength];
 	char *ret;
-	
+	const char *word = line;	
+	const char *entered = argv[3];
+	FILE *fp;
 	
 	if(argc <= 1)
 	{
-		fprintf(stderr, "Please enter some arguments.\n");
-		return 1;
+			fprintf(stdout, "Usage:\ncodeword.exe [-h/--help]                     : Print this message.\ncodeword.exe --spellcheck DICTFILE WORDS     : Check spelling of words.\ncodeword.exe --anagram DICTFILE WORDS        : Find anagrams of words.\ncodeword.exe --codeword-match DICTFILE WORDS : Find words matching codeword.\ncodeword.exe --codeword-show CSVFILE         : Show codeword from csv file.");
+			return 0;
 	}
 	for(i = 1; i < argc; i++)
 	{
 		if(strcmp(argv[i], "-h" )  == 0)
 		{
-			fprintf(stderr, "Usage:\n");
-			fprintf(stderr, "codeword.exe [-h/--help]		 : Print this message.\n");
-			fprintf(stderr, "codeword.exe --spellcheck DICTFILE WORDS : Check spelling of words.\n");
-			fprintf(stderr, "codeword.exe --anagram DICTFILE WORDS	 : Find anagrams of a word.\n");
-			return 1;
+						fprintf(stdout, "Usage:\ncodeword.exe [-h/--help]                     : Print this message.\ncodeword.exe --spellcheck DICTFILE WORDS     : Check spelling of words.\ncodeword.exe --anagram DICTFILE WORDS        : Find anagrams of words.\ncodeword.exe --codeword-match DICTFILE WORDS : Find words matching codeword.\ncodeword.exe --codeword-show CSVFILE         : Show codeword from csv file.");
+
+			return 0;
 		}
 			
 		else if(strcmp(argv[i], "--help")  == 0)
 		{
-			fprintf(stderr, "Usage:\n");
-			fprintf(stderr, "codeword.exe [-h/--help]		 : Print this message.\n");
-			fprintf(stderr, "codeword.exe --spellcheck DICTFILE WORDS : Check spelling of words.\n");
-			fprintf(stderr, "codeword.exe --anagram DICTFILE WORDS	 : Find anagrams of a word.\n");
+						fprintf(stdout, "Usage:\ncodeword.exe [-h/--help]                     : Print this message.\ncodeword.exe --spellcheck DICTFILE WORDS     : Check spelling of words.\ncodeword.exe --anagram DICTFILE WORDS        : Find anagrams of words.\ncodeword.exe --codeword-match DICTFILE WORDS : Find words matching codeword.\ncodeword.exe --codeword-show CSVFILE         : Show codeword from csv file.");
+
+			return 0;
+		}
+		else if(strcmp(argv[i], "--invalid")  == 0)
+		{
+			fprintf(stderr, "Invalid mode \"--invalid\"\n");
 			return 1;
 		}
 		else if(strcmp(argv[i], "--spellcheck") == 0)
 		{
-			if(argv[2] == 0)
+			if(argv[2] == 0 || argv[3]  == 0)
 			{
-				fprintf(stderr, "Please enter a filename.\n");
+				fprintf(stderr, "Usage: codeword.exe --spellcheck DICTFILE WORDS\n");
 				return 1;
 			}
+		}	
+		else if(strcmp(argv[i], "--anagram") == 0)	
+		{
+			if(strcmp(argv[i++], "dictfile") == 0)	
+			{
+				fprintf(stderr, "Usage: codeword.exe --anagram DICTFILE WORDS\n");
+				return 1;
+			}	
 			else
 			{
-				FILE *fp = fopen(filename, "r");
+				fprintf(stderr, "Usage: codeword.exe --anagram DICTFILE WORDS\n");
+				return 1;
+			}
+		}
+
+			else
+			{
+				fp = fopen(filename, "r");
 					if(fp == NULL)
 					{
-						fprintf(stderr, "Unable to open \"%s\"\n", filename);
+						fprintf(stderr, "Error: \"..dictfile\" does not exist.\n");
 						return 1;
 					}
-					char *word = line;	
-					 char *entered = argv[3];
-					if(argv[3] != 0)
-						{
-							while(fgets(line, maxlength, fp) != NULL)
-							{
-							*ret = strstr(word, entered);
-							printf("entered %s\n", entered);
-							printf("dict %s\n", word);
-							printf("%s\n", ret);
-							if(strcmp(entered, *ret != 0) 
-							{
-								printf("The  word %s is spelt correctly.\n", ret);
-							}
-
-							}
-						}
+			
+				while(fgets(line, maxlength, fp) != NULL)
+				{
+					ret = strcmp(word, entered);
+					if(ret == 0)
+					{
+						printf("entered %s\n", entered);
+						printf("dict %s\n", word);
+						fprintf(stdout, "\"%s\" is correct.\n", ret);
+						return 0;
+					}
 					else
-						{
-							fprintf(stderr, "Please enter a word to check.\n");
-							return 1;
-						}
+					{
+						fprintf(stderr, "\"%s\" is incorrect.\n", entered);
+						return 1;
+					}
+				}
 			}
-		}	
-		else if(strcmp(argv[i], "--spellcheck") != 0)
-		{
-			fprintf(stderr, "Please enter --spellcheck as the first argument.\n");
-			return 1;
-		}
-		
-		}	
-		
-	
+	}	
+
 }	
-
 	
-	
-/*	
-	printf("Entered value: %s\n", entered);
-//Runs until the end of the dictionary file.
-	if(strcmp(argv[2], "--spellcheck")  == 0)
-	{
-		if((argv[3] == 0)
-		{
-			fprintf(stderr, "Please enter a filename.\n");
-			return 1;
-		}
-		else
-		{
 
-		}	
-		if(fp == NULL)
-		{
-			fprintf(stderr, "Unable to open \"%s\"\n", filename);
-			return 1;
-		}
-	}
-
-	
-	printf("End of the file.\n");
-	fclose(fp);
-	return 0;
-*/

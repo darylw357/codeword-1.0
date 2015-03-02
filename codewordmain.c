@@ -5,10 +5,11 @@
 #include <string.h>
 
 //function dec
-char ArgsCheck(int argc);
+char ArgsCheck(int argc, char *argv[]);
+char ArgsCheck2(int argc, char *argv[]);
 
 //function def
-char ArgsCheck(int argc)
+char ArgsCheck(int argc, char *argv[])
 {
 	if(argc <= 1)
 	{
@@ -16,6 +17,17 @@ char ArgsCheck(int argc)
 		return 0;
 	}
 }
+
+char ArgsCheck2(int argc, char *argv[])
+{
+	if(strcmp(ArgsCheck(argc, *argv[1]), "-h" )  == 0)
+	{
+		fprintf(stdout, "Usage:\ncodeword.exe [-h/--help]                     : Print this message.\ncodeword.exe --spellcheck DICTFILE WORDS     : Check spelling of words.\ncodeword.exe --anagram DICTFILE WORDS        : Find anagrams of words.\ncodeword.exe --codeword-match DICTFILE WORDS : Find words matching codeword.\ncodeword.exe --codeword-show CSVFILE         : Show codeword from csv file.");
+		return 0;
+	}
+}	
+	
+
 
 int main(int argc, char *argv[])
 {
@@ -30,10 +42,48 @@ int main(int argc, char *argv[])
 	
 	
 	//function call
-	ArgsCheck(argc);
+	ArgsCheck(argc, *argv);
+	ArgsCheck2(argc, *argv);
 	
+	
+}
+	
+/*
+			else
+			{
+				fp = fopen(filename, "r");
+					if(fp == NULL)
+					{
+						fprintf(stderr, "Error: \"..dictfile\" does not exist.\n");
+						return 1;
+					}
+			
+				while(fgets(line, maxlength, fp) != NULL)
+				{
+					ret = strcmp(word, entered);
+					if(ret == 0)
+					{
+						printf("entered %s\n", entered);
+						printf("dict %s\n", word);
+						fprintf(stdout, "\"%s\" is correct.\n", ret);
+						return 0;
+					}
+					else
+					{
+						fprintf(stderr, "\"%s\" is incorrect.\n", entered);
+						return 1;
+					}
+				}
+			}
+	}	
 
-	for(i = 1; i < argc; i++)
+}	
+
+
+
+
+
+for(i = 1; i < argc; i++)
 	{
 		if(strcmp(argv[i], "-h" )  == 0)
 		{
@@ -73,37 +123,7 @@ int main(int argc, char *argv[])
 				fprintf(stderr, "Usage: codeword.exe --anagram DICTFILE WORDS\n");
 				return 1;
 			}
-		}
-
-			else
-			{
-				fp = fopen(filename, "r");
-					if(fp == NULL)
-					{
-						fprintf(stderr, "Error: \"..dictfile\" does not exist.\n");
-						return 1;
-					}
 			
-				while(fgets(line, maxlength, fp) != NULL)
-				{
-					ret = strcmp(word, entered);
-					if(ret == 0)
-					{
-						printf("entered %s\n", entered);
-						printf("dict %s\n", word);
-						fprintf(stdout, "\"%s\" is correct.\n", ret);
-						return 0;
-					}
-					else
-					{
-						fprintf(stderr, "\"%s\" is incorrect.\n", entered);
-						return 1;
-					}
-				}
-			}
-	}	
-
-}	
-
-
-
+*/			
+			
+			

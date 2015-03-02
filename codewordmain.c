@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <string.h>
 
+<<<<<<< HEAD
 //function dec
 char ArgsCheck(int argc, char *argv[]);
 char ArgsCheck2(int argc, char *argv[]);
@@ -29,6 +30,8 @@ char ArgsCheck2(int argc, char *argv[])
 	
 
 
+=======
+>>>>>>> parent of f99da1f... A working function
 int main(int argc, char *argv[])
 {
 	int i;
@@ -40,6 +43,7 @@ int main(int argc, char *argv[])
 	const char *entered = argv[3];
 	FILE *fp;
 	
+<<<<<<< HEAD
 	
 	//function call
 	ArgsCheck(argc, *argv);
@@ -84,6 +88,14 @@ int main(int argc, char *argv[])
 
 
 for(i = 1; i < argc; i++)
+=======
+	if(argc <= 1)
+	{
+			fprintf(stdout, "Usage:\ncodeword.exe [-h/--help]                     : Print this message.\ncodeword.exe --spellcheck DICTFILE WORDS     : Check spelling of words.\ncodeword.exe --anagram DICTFILE WORDS        : Find anagrams of words.\ncodeword.exe --codeword-match DICTFILE WORDS : Find words matching codeword.\ncodeword.exe --codeword-show CSVFILE         : Show codeword from csv file.");
+			return 0;
+	}
+	for(i = 1; i < argc; i++)
+>>>>>>> parent of f99da1f... A working function
 	{
 		if(strcmp(argv[i], "-h" )  == 0)
 		{
@@ -124,6 +136,31 @@ for(i = 1; i < argc; i++)
 				return 1;
 			}
 			
+<<<<<<< HEAD
 */			
 			
 			
+=======
+				while(fgets(line, maxlength, fp) != NULL)
+				{
+					ret = strcmp(word, entered);
+					if(ret == 0)
+					{
+						printf("entered %s\n", entered);
+						printf("dict %s\n", word);
+						fprintf(stdout, "\"%s\" is correct.\n", ret);
+						return 0;
+					}
+					else
+					{
+						fprintf(stderr, "\"%s\" is incorrect.\n", entered);
+						return 1;
+					}
+				}
+			}
+	}	
+
+}	
+	
+
+>>>>>>> parent of f99da1f... A working function
